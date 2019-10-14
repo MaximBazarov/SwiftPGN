@@ -39,7 +39,7 @@ final class SANSquareTests: XCTestCase {
     
     func test_SAN_Square_forEachIndexOfSquareToTest_parsedCorrectly() {
         indexOfSquareToTest.forEach{ (str, expectedIndex) in
-            let sut = SAN.Square(str)!.location.index
+            let sut = SAN.Square(str)!.index
             XCTAssertEqual(sut, expectedIndex)
         }
     }
@@ -76,7 +76,28 @@ final class SANSquareTests: XCTestCase {
         
     }
     
-    
+
+    //str.groups(for: Move).forEach { (group) in
+    //    if group[0] == "O-O " {
+    //        print("*** CASTLING SHORT \n")
+    //    } else if group[0] == "O-O-O " {
+    //        print("*** CASTLING LONG \n")
+    //    } else {
+    //        print("""
+    //            *** Group: \(group)
+    //            - Figure: \(group[2])
+    //            FROM:
+    //            - from rank: \(group[4])
+    //            - from file: \(group[5])
+    //            TO:
+    //            - square: \(group[7])
+    //            Check: \(group[8])
+    //            Promotion: \(group[9])
+    //            - figure: \(group[10])
+    //
+    //            """)
+    //    }
+
     
     static var allTests = [
         (

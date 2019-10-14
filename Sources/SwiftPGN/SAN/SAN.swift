@@ -33,7 +33,7 @@ public enum SAN {
     ///   + -----------------------
     ///     a  b  c  d  e  f  g  h   ⟵ Ranks
     /// ```
-    public struct Square{
+    public struct Square: Hashable {
         
         public let index: Int
         
@@ -80,7 +80,7 @@ public enum SAN {
     /// 2
     /// 1
     /// ```
-    public struct File {
+    public struct File: Hashable {
         let index: Int
 
         /// Init with an integer value representing a file from 1 to 8
@@ -104,7 +104,7 @@ public enum SAN {
     ///    ```
     ///    a  b  c  d  e  f  g  h   ⟵ Ranks
     ///    ```
-    public struct Rank {
+    public struct Rank: Hashable {
         private static let ranksLetters = "abcdefgh"
         
         
@@ -131,7 +131,7 @@ public enum SAN {
 
     
     /// Piece or Player color
-    public enum Color {
+    public enum Color: Hashable {
         case white
         case black
     }

@@ -60,6 +60,7 @@ public extension PGN {
 }
 
 extension PGN.Counterpart: Hashable {
+    
     public static func == (lhs: PGN.Counterpart, rhs: PGN.Counterpart) -> Bool {
         switch (lhs,rhs) {
         case let(.turn(lNum, lParts), .turn(rNum, rParts)):

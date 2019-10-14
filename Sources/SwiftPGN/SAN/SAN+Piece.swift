@@ -9,21 +9,21 @@ import Foundation
 
 public extension SAN {
     
+    enum PieceKind: Hashable {
+        case pawn
+        case rook
+        case knignt
+        case bishop
+        case queen
+        case king
+    }
+    
     struct Piece: Hashable {
         
-        public let kind: Kind
+        public let kind: PieceKind
         public let color: Color
         
-        public enum Kind {
-            case pawn
-            case rook
-            case knignt
-            case bishop
-            case queen
-            case king
-        }        
-        
-        public init( _ color: Color, _ kind: Kind) {
+        public init( _ color: Color, _ kind: PieceKind) {
             self.color = color
             self.kind = kind
         }
@@ -45,8 +45,6 @@ public extension SAN {
             default: return nil
             }
         }
-        
-        
         
     }
 }
