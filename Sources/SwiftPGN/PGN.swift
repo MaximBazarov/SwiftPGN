@@ -68,7 +68,7 @@ extension PGN.Counterpart: Hashable {
         case let(.whiteMove(lSAN), .whiteMove(rSAN)):
             return lSAN == rSAN
 
-        case let(.whiteMove(lSAN), .whiteMove(rSAN)):
+        case let(.blackMove(lSAN), .blackMove(rSAN)):
             return lSAN == rSAN
 
         default:

@@ -13,12 +13,12 @@ func Turn(_ num: PGN.TurnNumber, _ counterparts: [PGN.Counterpart]) -> PGN.Count
 }
 
 func WhiteMove(_ string: String) -> PGN.Counterpart? {
-    guard let san = SAN.Move(string) else { return nil }
+    guard let san = SAN.Move(string, color: .white) else { return nil }
     return PGN.Counterpart.whiteMove(san)
 }
 
 func BlackMove(_ string: String) -> PGN.Counterpart? {
-    guard let san = SAN.Move(string) else { return nil }
+    guard let san = SAN.Move(string, color: .white) else { return nil }
     return PGN.Counterpart.blackMove(san)
 }
 
