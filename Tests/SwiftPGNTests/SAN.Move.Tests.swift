@@ -57,9 +57,9 @@ final class SANMoveTests: XCTestCase {
     func test_axb4EqualQ_parsedCorrectly() {
         let san = "axb4=Q"
         let expected = SAN.Move(
-            color: .black,
+            color: .white,
             piece: .pawn,
-            fromFile: SAN.File("a"),
+            fromRank: SAN.Rank("a"),
             toSquare: SAN.Square("b4"),
             capture: true,
             promotionTo: .queen
