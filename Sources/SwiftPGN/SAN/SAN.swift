@@ -35,8 +35,8 @@ public enum SAN {
     /// ```
     public struct Square: Hashable {
         
+        // MARK: - Square
         public let index: Int
-        
         
         /// Init with integer value representing a square index from 0 to 63
         /// otherwise returns `nil`
@@ -81,6 +81,8 @@ public enum SAN {
     /// 1
     /// ```
     public struct File: Hashable {
+        
+        // MARK: - File -
         let index: Int
 
         /// Init with an integer value representing a file from 1 to 8
@@ -107,6 +109,7 @@ public enum SAN {
     public struct Rank: Hashable {
         private static let ranksLetters = "abcdefgh"
         
+        // MARK: - Rank -
         
         /// Integer index of the rank on the board
         let index: Int
@@ -128,12 +131,28 @@ public enum SAN {
         }
     }
     
-
     
+    // MARK: - PieceKind -
+    public enum PieceKind: Hashable {
+        case pawn
+        case rook
+        case knignt
+        case bishop
+        case queen
+        case king
+    }
+
+    // MARK: - Color 
     /// Piece or Player color
     public enum Color: Hashable {
         case white
         case black
+    }
+    
+    // MARK: - Castling
+    public enum Castling {
+        case long
+        case short
     }
 
 }

@@ -8,11 +8,8 @@
 import Foundation
 
 public extension SAN {
-    
-    enum Castling {
-        case long
-        case short
-    }
+        
+    // MARK: - Move
     
     /// Move e.g. Nxe4, 0-0-0, 0-0,
     struct Move: Hashable {
@@ -25,7 +22,8 @@ public extension SAN {
         let fromSquare: Square?
         let toSquare: Square?
         let check: Bool
-        let promotionTo: Piece?
+        let capture: Bool
+        let promotionTo: PieceKind?
         
         init(color: Color,
              castling: Castling? = nil,
@@ -35,7 +33,8 @@ public extension SAN {
              fromSquare: Square? = nil,
              toSquare: Square? = nil,
              check: Bool = false,
-             promotionTo: Piece? = nil)
+             capture: Bool = false,
+             promotionTo: PieceKind? = nil)
         {
             self.color = color
             self.castling = castling
@@ -43,8 +42,9 @@ public extension SAN {
             self.fromFile = fromFile
             self.fromRank = fromRank
             self.fromSquare = fromSquare
-            self.toSquare = square
+            self.toSquare = toSquare
             self.check = check
+            self.capture = capture
             self.promotionTo = promotionTo
         }
         
@@ -52,15 +52,18 @@ public extension SAN {
             return lhs.color == rhs.color
                 && lhs.castling == rhs.castling
                 && lhs.piece == rhs.piece
-                && lhs.file == rhs.file
-                && lhs.rank == rhs.rank
-                && lhs.square == rhs.square
+                && lhs.fromFile == rhs.fromFile
+                && lhs.fromRank == rhs.fromRank
+                && lhs.fromSquare == rhs.fromSquare
+                && lhs.toSquare == rhs.toSquare
                 && lhs.check == rhs.check
+                && lhs.capture == rhs.capture
                 && lhs.promotionTo == rhs.promotionTo
         }
-
+        
     }
     
+    // MARK: - Move Parsing
     /// Move e.g. Nxe4, 0-0-0, 0-0,
     static func move(of str: String, color: Color) -> Move? {
         let pattern = #"(([BNRQKbnrqk])?(([a-h])?([1-8])?)(x)?([a-h][1-8])(\+)?(\=([BNRQKbnrqk]))?)|((O-O|O-O-O)\s)"#
@@ -74,11 +77,13 @@ public extension SAN {
             return Move(
                 color: piece?.color ?? color,
                 piece: piece?.kind ?? .pawn,
-                file: SAN.File(Int(moveParts[5]) ?? -1),
-                rank: SAN.Rank(moveParts[4]),
-                square: SAN.Square(moveParts[7]),
+                fromFile: SAN.File(Int(moveParts[5]) ?? -1),
+                fromRank: SAN.Rank(moveParts[4]),
+                fromSquare: SAN.Square(moveParts[3]),
+                toSquare: SAN.Square(moveParts[7]),
                 check: moveParts[8].count > 0,
-                promotionTo: SAN.Piece(moveParts[10])
+                capture: moveParts[6].count > 0,
+                promotionTo: SAN.Piece(moveParts[10])?.kind
             )
         }
     }
