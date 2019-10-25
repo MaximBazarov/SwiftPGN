@@ -36,6 +36,7 @@ public struct PGN: Hashable {
         case event = "Event"
         case site = "Site"
         case date = "Date"
+        case round = "Round"
         case white = "White"
         case black = "Black"
         case result = "Result"
@@ -54,7 +55,10 @@ public struct PGN: Hashable {
 
 public extension PGN {
     init?(_ string: String) {
-        return nil
+        self.counterparts = []
+        //return nil
+        //guard let parts = parse(pgn: string) else { return nil }
+        //self.counterparts = parts
     }
 
 }
