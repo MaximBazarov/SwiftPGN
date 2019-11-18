@@ -75,7 +75,35 @@ extension PGN.Counterpart: Hashable {
 
         case let(.blackMove(lSAN), .blackMove(rSAN)):
             return lSAN == rSAN
-
+            
+        case let(.tagPair(lTag, lText), .tagPair(rTag, rText)):
+            return (lTag == rTag) && (lText == rText)
+            
+        case let(.squareHighlight(lSquare, lColor), .squareHighlight(rSquare, rColor)):
+            return (lSquare == rSquare) && (lColor == rColor)
+            
+        case let(.arrow(lFrom, lTo, lColor), .arrow(rFrom, rTo, rColor)):
+            return (lFrom == rFrom) && (lTo == rTo) && (lColor == rColor)
+            
+        case let(.text(lText), .text(rText)):
+            return lText == rText
+            
+        case let(.annotation(lAnnotations), .annotation(rAnnotations)):
+            if lAnnotations.count == rAnnotations.count {
+                for (index, lAnnotation) in lAnnotations.enumerated() {
+                    let rAnnotation = rAnnotations[index]
+                    if lAnnotation != rAnnotation {
+                        return false
+                    }
+                }
+            } else {
+                return false
+            }
+            return true
+            
+        case let(.moveResult(lResult), .moveResult(rResult)):
+            return lResult == rResult
+            
         default:
             return false
         }
